@@ -17,4 +17,4 @@ public class Program
         }      
     }
 ```
-在上面的代码示例中，
+在上面的代码示例中，CreateDatabaseIfNotExistsAsync会检测并创建Id为PennyDB的DataBase,然后使用CreateDocumentCollectionIfNotExistsAsync来创建collection,
