@@ -58,7 +58,7 @@ var stu = p.client.CreateDocumentQuery<DocDto>(
 ```
 
 #### 4. performance and suggestions
-策略1：使用网络直连的方式<br/>
+##### 策略1：使用网络直连的方式<br/>
 客户端如何连接到Azure Cosmos DB对性能有重要的影响，尤其是在客户端观察到的延迟方面。配置客户端连接策略有两个关键的配置设置—连接模式和连接协议.<br/>
 1) 网关模式 --- 默认模式，支持所有的SDK平台。适用于具有严格防火墙限制的网络中，因为它是使用标准的https协议.<br/>
 2) 直连模式 --- 支持TCP和HTTPS协议,.net standard 2.0支持该模式.<br/>
@@ -73,4 +73,5 @@ client = new DocumentClient(new Uri(EndpointUrl), PrimaryKey, new ConnectionPoli
             });
 ```
 在database创建的时候指定网络连接方式。<br/>
-策略2：
+##### 策略2：Use 64-bit host processing
+对于跨partition查询，使用64位宿主处理会提升性能。
