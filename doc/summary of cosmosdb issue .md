@@ -1,6 +1,6 @@
 ### cosmosdb问题汇总
 
-#### 1.如何创建cosmosdb？
+#### 1.How to create cosmosdb with .net core？
 ```javascript
 public class Program
     {
@@ -45,10 +45,13 @@ cosmosdb提供了都中API查询方式，如sql API,Mongo API,Table API等，其
             // 3 - Query database by sql
             //***************************************
             var sql = "SELECT * FROM c where c.StudentNo>=250000 and c.StudentNo <= 250020";
-            var res = p.client.CreateDocumentQuery<DocDto>(p.collection.SelfLink, sql).ToList();
+            var res = client.CreateDocumentQuery<DocDto>(p.collection.SelfLink, sql).ToList();
 ```
 
 #### 3. Query with PartitionKey
 
 
 #### 4. performance and suggestions
+策略1：使用网络直连的方式
+
+策略2：
