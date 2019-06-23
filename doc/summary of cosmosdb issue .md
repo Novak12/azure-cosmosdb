@@ -49,9 +49,28 @@ cosmosdb提供了都中API查询方式，如sql API,Mongo API,Table API等，其
 ```
 
 #### 3. Query with PartitionKey
-
+在cosmosdb中，数据库会根据partition key进行分区。如果在查询数据时，已经知道数据所在的分区，最佳的查询方式就是带上partition key进行查询：
+```javascript
+var option = new FeedOptions { PartitionKey = new PartitionKey("/school")};
+var stu = p.client.CreateDocumentQuery<DocDto>(
+                    UriFactory.CreateDocumentCollectionUri("PennyDB", "MyCollection4"), option)
+                    .Where(x => x.StudentNo == 250000).ToList();
+```
 
 #### 4. performance and suggestions
-策略1：使用网络直连的方式
+策略1：使用网络直连的方式<br/>
+客户端如何连接到Azure Cosmos DB对性能有重要的影响，尤其是在客户端观察到的延迟方面。配置客户端连接策略有两个关键的配置设置—连接模式和连接协议.<br/>
+1) 网关模式 --- 默认模式，支持所有的SDK平台。适用于具有严格防火墙限制的网络中，因为它是使用标准的https协议.<br/>
+2) 直连模式 --- 支持TCP和HTTPS协议,.net standard 2.0支持该模式.<br/>
 
+最佳的方式 --- 直连模式
+```javascript
+client = new DocumentClient(new Uri(EndpointUrl), PrimaryKey, new ConnectionPolicy
+            {
+                ConnectionMode = ConnectionMode.Direct,
+                ConnectionProtocol = Protocol.Tcp,
+                RequestTimeout = new TimeSpan(1, 0, 0),
+            });
+```
+在database创建的时候指定网络连接方式。<br/>
 策略2：
