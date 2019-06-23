@@ -73,5 +73,6 @@ client = new DocumentClient(new Uri(EndpointUrl), PrimaryKey, new ConnectionPoli
             });
 ```
 在database创建的时候指定网络连接方式。<br/>
-##### 策略2：Use 64-bit host processing
+##### 策略2：在app的生命中期内。client使用单例模式
+##### 策略3：Use 64-bit host processing
 对于跨partition查询，使用64位宿主处理会提升性能。
