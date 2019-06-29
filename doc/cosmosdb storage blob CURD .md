@@ -1,0 +1,1 @@
+#### cosmosdb storage blob CURD
